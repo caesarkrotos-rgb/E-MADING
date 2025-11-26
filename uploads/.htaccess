@@ -1,0 +1,21 @@
+# Keamanan untuk direktori uploads
+Options -Indexes
+
+# Hanya izinkan file gambar dan dokumen
+<FilesMatch "\.(jpg|jpeg|png|gif|pdf|doc|docx|xls|xlsx|ppt|pptx|txt)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# Blokir eksekusi script
+<FilesMatch "\.(php|php3|php4|php5|phtml|pl|py|jsp|asp|sh|cgi)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Set header untuk gambar
+<IfModule mod_headers.c>
+    <FilesMatch "\.(jpg|jpeg|png|gif)$">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+</IfModule>
